@@ -13,18 +13,10 @@
     }
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #0d0d0d;
+      background-color: #ffffff;
       color: #333;
       min-height: 100vh;
       padding: 20px;
-    }
-    .container {
-      background-color: #ffffff;
-      padding: 20px 25px;
-      border-radius: 12px;
-      width: 100%;
-      min-height: calc(100vh - 40px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
     .logo {
       text-align: center;
@@ -127,23 +119,21 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <img src="https://raw.githubusercontent.com/Fiisya/uploads/main/uploads/1747124676903.jpeg" alt="Facebook Logo" />
-    </div>
-    <h1>Pengunduh Video Facebook</h1>
-    <p class="description">Alat untuk mengunduh video facebook Full HD, 1080p, 2k, 4k</p>
-    <div class="input-group">
-      <input type="text" id="urlInput" placeholder="Masukkan tautan video Facebook di sini" />
-      <button onclick="download()">Unduh</button>
-    </div>
-    <div id="result"></div>
-    <div id="loading" style="display:none;">Loading...</div>
-    
-    <footer>
-      © 2025 AlfixD
-    </footer>
+  <div class="logo">
+    <img src="https://raw.githubusercontent.com/Fiisya/uploads/main/uploads/1747124676903.jpeg" alt="Facebook Logo" />
   </div>
+  <h1>Pengunduh Video Facebook</h1>
+  <p class="description">Alat untuk mengunduh video facebook Full HD, 1080p, 2k, 4k</p>
+  <div class="input-group">
+    <input type="text" id="urlInput" placeholder="Masukkan tautan video Facebook di sini" />
+    <button onclick="download()">Unduh</button>
+  </div>
+  <div id="result"></div>
+  <div id="loading" style="display:none;">Loading...</div>
+  
+  <footer>
+    &copy; 2025 AlfixD. All rights reserved.
+  </footer>
 
   <script>
     function pasteLink() {
@@ -177,14 +167,23 @@
           return;
         }
 
-        resultDiv.innerHTML = `
-          <h3>${data.title}</h3>
-          <img src="${data.thumbnail}" alt="Thumbnail" />
-          <div>
-            <a class="download-link" href="${data.download_link.hd}" target="_blank">Download HD</a><br>
-            <a class="download-link" href="${data.download_link.sd}" target="_blank">Download SD</a>
-          </div>
-        `;
+        <!-- Bagian dalam resultDiv -->
+resultDiv.innerHTML = `
+  <h3>${data.title}</h3>
+  <img src="${data.thumbnail}" alt="Thumbnail" />
+  <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+    <a href="${data.download_link.hd}" target="_blank">
+      <button style="width: 100%; padding: 12px; background-color: #00cc66; border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer;">
+        Download HD
+      </button>
+    </a>
+    <a href="${data.download_link.sd}" target="_blank">
+      <button style="width: 100%; padding: 12px; background-color: #00cc66; border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer;">
+        Download SD
+      </button>
+    </a>
+  </div>
+`;
       } catch (err) {
         loading.style.display = 'none';
         resultDiv.innerHTML = `<p style="color: #ff4c4c;">Terjadi kesalahan: ${err.message}</p>`;
